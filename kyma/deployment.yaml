@@ -1,0 +1,37 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hello-kyma
+spec:
+  ports:
+  - name: http
+    port: 5000
+  selector:
+    app: hello-kyma
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-kyma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-kyma
+  template:
+    metadata:
+      labels:
+        app: hello-kyma
+    spec:
+      containers:
+      - name: hello-kyma
+        image: athaler/hello-kyma:latest
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 5000
+        resources:
+          limits:
+            memory: 50Mi
+          requests:
+            memory: 25Mi

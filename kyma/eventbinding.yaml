@@ -1,0 +1,23 @@
+apiVersion: eventing.kyma-project.io/v1alpha1
+kind: Subscription
+metadata:
+  name: hello-kyma
+  labels:
+    app: hello-kyma
+spec:
+  endpoint: http://hello-kyma.default:5000/events
+  event_type: order.created
+  event_type_version: v1
+  include_subscription_name_header: true
+  source_id: commerce
+---
+  
+apiVersion: applicationconnector.kyma-project.io/v1alpha1
+kind: EventActivation
+metadata:
+  name: hello-kyma
+  labels:
+    app: hello-kyma
+spec:
+  displayName: SAP Commerce Cloud - Events
+  sourceId: commerce
