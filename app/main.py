@@ -22,7 +22,7 @@ def events():
     print("Received event with orderCode " + orderCode)
 
     if os.environ.get('AZ_host'):
-        response = requests.get(os.environ.get('GATEWAY_URL') + "/test/orders/" + orderCode)
+        response = requests.get(os.environ.get('GATEWAY_URL') + "/webshop/orders/" + orderCode)
         print("Received from '" + os.environ.get('GATEWAY_URL') + "' the response '"+ response.text + "'")
 
         redisClient.set("order", response.text)
